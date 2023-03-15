@@ -2,19 +2,21 @@ import { Form, Formik, Field } from 'formik';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchMovies } from '../../utils/ApiService';
-import { TrendingList } from 'components/TrendingList/TrendingList';
+import TrendingList from 'components/TrendingList/TrendingList';
+import PropTypes from 'prop-types';
 
-export const SearchForm = onSubmit => {
+const SearchForm = onSubmit => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSubmit = (query, { resetForm }) => {
-    setSearchParams(query);
+    const searchMovie = query !== '' ? query : {};
+    setSearchParams(searchMovie);
     resetForm();
   };
 
   useEffect(() => {
-    const movieTitle = searchParams.get('query');
+    const movieTitle = searchParams.get('query') ?? '';
     if (movieTitle) {
       searchMovies(movieTitle).then(api => setMovies(api.results));
     }
@@ -39,3 +41,9 @@ export const SearchForm = onSubmit => {
     </div>
   );
 };
+
+SearchForm.prototype = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+export default SearchForm;

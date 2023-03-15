@@ -8,14 +8,13 @@ import {
 import { movieDetails } from '../../utils/ApiService';
 import { useEffect, useState } from 'react';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movies, setMovies] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     movieDetails(movieId).then(id => setMovies(id));
   }, [movieId]);
-  // console.log(movies);
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
@@ -66,3 +65,5 @@ export const MovieDetails = () => {
     </div>
   );
 };
+
+export default MovieDetails;

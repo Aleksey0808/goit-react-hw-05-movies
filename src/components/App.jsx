@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-import { Home } from '../pages/Home';
-import { Movies } from '../pages/Movies';
-import { MovieDetails } from '../pages/MovieDetails/MovieDetails';
-import { NotFound } from '../pages/NotFound/NotFound';
-import { Cast } from './Cast/Cast';
-import { Reviews } from './Reviews/Reviews';
-import { Layout } from './Layout/Layout';
+import { Home } from '../pages/Home/Home';
+import Movies from '../pages/Movies/Movies';
+import MovieDetails from '../pages/MovieDetails/MovieDetails';
+import NotFound from '../pages/NotFound/NotFound';
+import Cast from './Cast/Cast';
+import Reviews from './Reviews/Reviews';
+import Layout from './Layout/Layout';
 
-export const App = () => {
+const App = () => {
   return (
     <div>
       <Routes>
@@ -24,3 +24,5 @@ export const App = () => {
     </div>
   );
 };
+
+export default App;
