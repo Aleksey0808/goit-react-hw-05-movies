@@ -4,7 +4,7 @@ export const TrendingList = ({ movies }) => {
   const location = useLocation();
   return (
     <div>
-      <h2>Trending today</h2>
+      {location.pathname !== '/movies' && <h2>Trending today</h2>}
       <ul>
         {movies.map(({ id, title }) => (
           <li key={id}>

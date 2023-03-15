@@ -1,28 +1,41 @@
-import React from 'react';
-import { useFormik } from 'formik';
+import { Form, Formik, Field } from 'formik';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { searchMovies } from '../../utils/ApiService';
+import { TrendingList } from 'components/TrendingList/TrendingList';
 
-export const SearchForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      movie: '',
-    },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+export const SearchForm = onSubmit => {
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleSubmit = (query, { resetForm }) => {
+    setSearchParams(query);
+    resetForm();
+  };
+
+  useEffect(() => {
+    const movieTitle = searchParams.get('query');
+    if (movieTitle) {
+      searchMovies(movieTitle).then(api => setMovies(api.results));
+    }
+  }, [searchParams]);
+
+  const initialValues = {
+    query: '',
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="">Search movie</label>
-      <input
-        id="movie"
-        placeholder="Search..."
-        name="movie"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.movie}
-      />
+    <div>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Form>
+          <label>
+            <Field type="text" name="query" />
+          </label>
 
-      <button type="submit">Submit</button>
-    </form>
+          <button type="submit">button</button>
+        </Form>
+      </Formik>
+      <TrendingList movies={movies} />
+    </div>
   );
 };

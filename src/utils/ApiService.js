@@ -28,7 +28,21 @@ export async function popularMovies(page = 1) {
 export async function movieReviews(moviesId) {
   try {
     return await axios
-      .get(`${BASE_URL}${END_POINTS.movieReviews}`, {
+      .get(`${BASE_URL}/movie/${moviesId}${END_POINTS.movieReviews}`, {
+        params: {
+          api_key: API_KEY,
+        },
+      })
+      .then(response => response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function movieCast(moviesId) {
+  try {
+    return await axios
+      .get(`${BASE_URL}/movie/${moviesId}${END_POINTS.movieCredits}`, {
         params: {
           api_key: API_KEY,
         },
@@ -42,9 +56,24 @@ export async function movieReviews(moviesId) {
 export async function movieDetails(moviesId) {
   try {
     return await axios
-      .get(`${BASE_URL}${END_POINTS.movieReviews}`, {
+      .get(`${BASE_URL}${END_POINTS.movieDetails}/${moviesId}`, {
         params: {
           api_key: API_KEY,
+        },
+      })
+      .then(response => response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function searchMovies(query) {
+  try {
+    return await axios
+      .get(`${BASE_URL}${END_POINTS.querySearch}`, {
+        params: {
+          api_key: API_KEY,
+          query: query,
         },
       })
       .then(response => response.data);

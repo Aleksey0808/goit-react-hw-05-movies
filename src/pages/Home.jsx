@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 import { TrendingList } from '../components/TrendingList/TrendingList';
 
 import { usePopularMovies } from '../utils/hooks/usePopularMovies';
@@ -9,7 +9,6 @@ export const Home = () => {
   return (
     <div>
       <TrendingList movies={movies} />
-      <Outlet />
     </div>
   );
 };
