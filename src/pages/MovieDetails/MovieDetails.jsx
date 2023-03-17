@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../components/Loader/Loader';
-import { IoMdArrowRoundBack } from 'react-icons/io';
+
 import {
   Icon,
   Container,
