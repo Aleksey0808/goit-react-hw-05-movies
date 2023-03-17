@@ -1,10 +1,11 @@
 import SearchForm from 'components/SearchForm/SearchForm';
+import { MovieContainer } from './Movies.styled';
 
 const Movies = () => {
   return (
-    <div>
+    <MovieContainer>
       <SearchForm />
-    </div>
+    </MovieContainer>
   );
 };
 

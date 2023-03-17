@@ -4,6 +4,7 @@ const NotFound = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
   console.log(location);
+
   return (
     <div>
       <p>NotFound</p>

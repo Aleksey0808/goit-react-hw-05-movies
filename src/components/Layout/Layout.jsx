@@ -1,26 +1,21 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import styled from '@emotion/styled';
-
-const StyledLink = styled(NavLink)`
-  color: #212121;
-  &.active {
-    color: orangered;
-  }
-`;
+import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import Loader from '../Loader/Loader';
+import { Container, StyledLink, Header } from './Layout.styled';
 
 const Layout = () => {
   return (
-    <>
-      <header>
+    <Container>
+      <Header>
         <nav>
           <StyledLink to="/">Home</StyledLink>
           <StyledLink to="/movies">Movies</StyledLink>
         </nav>
-      </header>
-      <main>
+      </Header>
+      <Suspense fallback={<Loader />}>
         <Outlet />
-      </main>
-    </>
+      </Suspense>
+    </Container>
   );
 };
 export default Layout;

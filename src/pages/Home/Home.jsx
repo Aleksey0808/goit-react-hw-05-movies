@@ -2,19 +2,36 @@
 import TrendingList from '../../components/TrendingList/TrendingList';
 import { popularMovies } from '../../utils/ApiService';
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../components/Loader/Loader';
+import { HomeContainer } from './Home.styled';
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    popularMovies().then(api => setMovies(api.results));
+    setLoad(true);
+    popularMovies()
+      .then(api => setMovies(api.results))
+      .catch(error => {
+        toast.error('Error ofrequast!', { autoClose: 1500 });
+        console.log(error);
+      })
+      .finally(() => {
+        setLoad(false);
+      });
   }, []);
 
   return (
-    <div>
+    <HomeContainer>
+      <ToastContainer />
+      <h2>Trending today</h2>
+      {load && <Loader />}
       <TrendingList movies={movies} />
-    </div>
+    </HomeContainer>
   );
 };
 
-// export default Home;
+export default Home;

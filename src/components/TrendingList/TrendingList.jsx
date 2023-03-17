@@ -1,18 +1,21 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { MovieLink, List } from './TrendingList.styled';
 
 const TrendingList = ({ movies }) => {
   const location = useLocation();
+
   return (
     <div>
-      {location.pathname !== '/movies' && <h2>Trending today</h2>}
-      <ul>
+      <List>
         {movies.map(({ id, title }) => (
           <li key={id}>
-            <Link to={`/movies/${id}`}>{title}</Link>
+            <MovieLink to={`/movies/${id}`} state={{ from: location }}>
+              {title}
+            </MovieLink>
           </li>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
